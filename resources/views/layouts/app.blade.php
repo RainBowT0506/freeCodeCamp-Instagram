@@ -15,7 +15,8 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
-    @vite('resources/sass/app.css')
+    @vite('resources/css/app.css')
+    {{-- @vite('resources/sass/app.css') --}}
 </head>
 
 <body>

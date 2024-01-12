@@ -9,7 +9,7 @@
             </div>
             <div class="col-9 pl-10 pt-10 items-center">
                 <div>
-                    <h1 class="font-bold text-2xl">rainbowt0506</h1>
+                    <h1 class="font-bold text-2xl">{{ $user->username }}</h1>
                 </div>
                 <div class="flex pt-3">
                     <div class="pr-3"><strong class="pr-2">9</strong>posts</div>
@@ -37,5 +37,4 @@
             <div class="col-4"><img src="/image/painting3.jpg" class="p-2 h-40 w-40 "></div>
         </div>
     </div>
-
 @endsection
