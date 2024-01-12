@@ -8,8 +8,9 @@
                 <img src="/image/avatar.jpg" class=" h-40 w-40 rounded-full">
             </div>
             <div class="col-9 pl-10 pt-10 items-center">
-                <div>
+                <div class="flex justify-between items-baseline">
                     <h1 class="font-bold text-2xl">{{ $user->username }}</h1>
+                    <a href="#">Add New Post</a>
                 </div>
                 <div class="flex pt-3">
                     <div class="pr-3"><strong class="pr-2">9</strong>posts</div>

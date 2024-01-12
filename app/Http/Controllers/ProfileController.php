@@ -12,7 +12,7 @@ class ProfileController extends Controller
         // dd($user);
         $user = User::findOrFail($user);
         // dd($user);
-        return view('home', [
+        return view('profiles.index', [
             'user' => $user,
         ]);
     }
