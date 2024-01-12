@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class PostsController extends Controller
 {
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware("auth");
     }
 
@@ -28,8 +29,13 @@ class PostsController extends Controller
         // $post->caption = $data['caption'];
         // $post->save();
 
-        auth()->user()->posts()->create($data);  
+        // dd(request('image')->store('uploads', 'public'));
 
-        dd(request()->all());
+        $data['image'] = request('image')->store('uploads', 'public');
+
+        auth()->user()->posts()->create($data);
+
+        // dd(request()->all());
+        return redirect('profile/'.auth()->user()->id);
     }
 }
