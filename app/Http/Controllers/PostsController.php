@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class PostsController extends Controller
 {
@@ -20,7 +22,7 @@ class PostsController extends Controller
 
     public function store()
     {
-        $data = request()->validate([
+        $imgPath = request()->validate([
             'caption' => 'required',
             'image' => ['required', 'image'],
         ]);
@@ -31,11 +33,31 @@ class PostsController extends Controller
 
         // dd(request('image')->store('uploads', 'public'));
 
-        $data['image'] = request('image')->store('uploads', 'public');
+        $imgPath['image'] = request('image')->store('uploads', 'public');
 
-        auth()->user()->posts()->create($data);
+        // create image manager with desired driver
+        $manager = new ImageManager(new Driver());
+
+        // read image from file system
+        $image = $manager->read('storage/' . $imgPath['image']);
+
+        // resize image proportionally to 300px width
+        $image->scale(width: 1200, height: 1200);
+        $image->save();
+
+
+        // $imagePath = request('image')->store('uploads', 'public');
+        // $image = Image::make(public_path("storage/{$imagePath}"))->fit(1200, 1200);
+        // $image->save();
+
+        auth()->user()->posts()->create($imgPath);
 
         // dd(request()->all());
-        return redirect('profile/'.auth()->user()->id);
+        return redirect('profile/' . auth()->user()->id);
+    }
+
+    public function show($post)
+    {
+        dd($post);
     }
 }

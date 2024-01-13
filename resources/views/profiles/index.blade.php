@@ -27,7 +27,9 @@
     {{-- article --}}
     <div class="row pt-10 flex">
         @foreach ($user->posts as $post)
-            <div class="col-4"><img src="/storage/{{ $post->image }}" class="p-2 h-40 w-40 "></div>
+            <a href="/p/{{ $post->id }}">
+                <div class="col-4"><img src="/storage/{{ $post->image }}" class="p-2 h-40 w-40 "></div>
+            </a>
         @endforeach
     </div>
     </div>
