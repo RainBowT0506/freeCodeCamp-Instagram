@@ -19,13 +19,13 @@ class ProfileController extends Controller
 
     public function edit(User $user)
     {
-        $this->authorized('update', $user->profile);
+        $this->authorize('update', $user->profile);
         return view('profiles.edit', compact('user'));
     }
 
     public function update(User $user)
     {
-        $this->authorized('update', $user->profile);
+        $this->authorize('update', $user->profile);
         $data = request()->validate([
             'title' => 'required',
             'description' => 'required',
@@ -54,7 +54,7 @@ class ProfileController extends Controller
 
         auth()->user()->profile->update(array_merge(
             $data,
-            ['image' => $imgPath]
+            $imgPath
         ));
 
 

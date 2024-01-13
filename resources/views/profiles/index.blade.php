@@ -5,7 +5,7 @@
         {{-- header --}}
         <div class="row flex">
             <div class="col-3 p-5 flex items-center">
-                <img src="/image/avatar.jpg" class=" h-40 w-40 rounded-full">
+                <img src="/storage/{{ $user->profile->image }}" class=" h-40 w-40 rounded-full">
             </div>
             <div class="col-9 pl-10 pt-10 items-center">
                 <div class="flex justify-between items-baseline">
@@ -20,7 +20,6 @@
                 @can('update', $user->profile)
                     <a href="/profile/{{ $user->id }}/edit">Edit Profile</a>
                 @endcan
-                <a href="/profile/{{ $user->id }}/edit">Edit Profile</a>
                 <div class="flex pt-3">
                     <div class="pr-2"><strong class="pr-2">{{ $user->posts->count() }}</strong></div>posts
                     <div class="pr-2"><strong class="pr-2">99</strong>followers</div>
