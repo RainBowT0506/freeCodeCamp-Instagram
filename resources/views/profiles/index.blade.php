@@ -10,8 +10,16 @@
             <div class="col-9 pl-10 pt-10 items-center">
                 <div class="flex justify-between items-baseline">
                     <h1 class="font-bold text-2xl">{{ $user->username }}</h1>
-                    <a href="/p/create">Add New Post</a>
+
+                    @can('update', $user->profile)
+                        <a href="/p/create">Add New Post</a>
+                    @endcan
+
                 </div>
+
+                @can('update', $user->profile)
+                    <a href="/profile/{{ $user->id }}/edit">Edit Profile</a>
+                @endcan
                 <a href="/profile/{{ $user->id }}/edit">Edit Profile</a>
                 <div class="flex pt-3">
                     <div class="pr-2"><strong class="pr-2">{{ $user->posts->count() }}</strong></div>posts
