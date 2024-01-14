@@ -1,15 +1,41 @@
 @extends('layouts.app')
+<script>
+    const followBtn = document.getElementById('followBtn');
 
+    followBtn.addEventListener('click', function() {
+        followUser({{ $user->id }});
+    });
+ 
+
+    function followUser(userId) {
+        console.log('User ID:', userId);
+        // 发送关注请求
+        axios.post(`/follow/${userId}`)
+            .then(response => {
+                // 处理成功响应
+                console.log(response.data);
+                // 可以在这里更新按钮状态或其他用户界面
+            })
+            .catch(error => {
+                // 处理错误
+                console.error(error);
+            });
+    }
+</script>
 @section('content')
     <div class="container">
         {{-- header --}}
         <div class="row flex">
             <div class="col-3 p-5 flex items-center">
-                <img src="{{ $user->profile->profileImage()}}" class=" h-40 w-40 rounded-full">
+                <img src="{{ $user->profile->profileImage() }}" class=" h-40 w-40 rounded-full">
             </div>
             <div class="col-9 pl-10 pt-10 items-center">
                 <div class="flex justify-between items-baseline">
-                    <h1 class="font-bold text-2xl">{{ $user->username }}</h1>
+                    <div class="flex items-center pb-3">
+                        <h1 class="font-bold text-2xl">{{ $user->username }}</h1>
+
+                        <button class="btn btn-primary ml-4" id="followBtn">Follow</button>
+                    </div>
 
                     @can('update', $user->profile)
                         <a href="/p/create">Add New Post</a>

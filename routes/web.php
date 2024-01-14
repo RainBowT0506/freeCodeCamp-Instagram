@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FollowController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -21,10 +22,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::post('follow/{user}', [FollowController::class, 'store']);
+
 Route::get('/p/create', [PostsController::class, 'create']);
 Route::post('/p', [PostsController::class, 'store']);
 Route::get('/p/{post}', [PostsController::class, 'show']);
 
 Route::get('/profile/{user}', [ProfileController::class, 'index'])->name('profile.show');
-Route::get('/profile/{user}/edit', [ProfileController::class,'edit'])->name('profile.edit');
-Route::patch('/profile/{user}', [ProfileController::class,'update'])->name('profile.update');
+Route::get('/profile/{user}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::patch('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update');
