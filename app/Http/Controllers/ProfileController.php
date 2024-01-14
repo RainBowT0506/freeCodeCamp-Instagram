@@ -45,6 +45,8 @@ class ProfileController extends Controller
             // resize image proportionally to 300px width
             $image->scale(width: 1200, height: 1200);
             $image->save();
+
+            $imageArray = ['image' => $imgPath];
         }
 
         // dd(array_merge(
@@ -54,7 +56,7 @@ class ProfileController extends Controller
 
         auth()->user()->profile->update(array_merge(
             $data,
-            $imgPath
+            $imageArray ?? []
         ));
 
 
