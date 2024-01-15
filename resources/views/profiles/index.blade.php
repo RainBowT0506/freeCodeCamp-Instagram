@@ -5,19 +5,15 @@
     followBtn.addEventListener('click', function() {
         followUser({{ $user->id }});
     });
- 
+
 
     function followUser(userId) {
         console.log('User ID:', userId);
-        // 发送关注请求
         axios.post(`/follow/${userId}`)
             .then(response => {
-                // 处理成功响应
                 console.log(response.data);
-                // 可以在这里更新按钮状态或其他用户界面
             })
             .catch(error => {
-                // 处理错误
                 console.error(error);
             });
     }
@@ -48,8 +44,9 @@
                 @endcan
                 <div class="flex pt-3">
                     <div class="pr-2"><strong class="pr-2">{{ $user->posts->count() }}</strong></div>posts
-                    <div class="pr-2"><strong class="pr-2">99</strong>followers</div>
-                    <div class="pr-2"><strong class="pr-2">999</strong>following</div>
+                    <div class="pr-2"><strong class="pr-2">{{ $user->profile->followers->count() }}</strong>followers
+                    </div>
+                    <div class="pr-2"><strong class="pr-2">{{ $user->following->count() }}</strong>following</div>
                 </div>
                 <div class="pt-4 font-bold">{{ $user->profile->title }}</div>
                 <div class="max-w-2xl">{{ $user->profile->description }}</div>
